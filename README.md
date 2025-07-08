@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Course Manager Plugin for Moodle
 
 **Version:** 1.1.0  
