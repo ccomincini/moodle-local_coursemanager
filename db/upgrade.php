@@ -1,23 +1,23 @@
 <?php
+
 // ===============================================
 // File: local/coursemanager/db/upgrade.php
 // ===============================================
 defined('MOODLE_INTERNAL') || die();
 
-function xmldb_local_coursemanager_upgrade($oldversion) {
+function xmldb_local_coursemanager_upgrade($oldversion)
+{
     global $DB;
 
     $dbman = $DB->get_manager();
 
     // Sempre verifica e crea la tabella se non esiste
     if ($oldversion < 2024010104) {
-
         // Define table local_coursemanager_sections to be created.
         $table = new xmldb_table('local_coursemanager_sections');
 
         // Solo se la tabella non esiste già
         if (!$dbman->table_exists($table)) {
-            
             // Adding fields to table local_coursemanager_sections.
             $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
             $table->add_field('courseid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
@@ -36,7 +36,7 @@ function xmldb_local_coursemanager_upgrade($oldversion) {
 
             // Create the table
             $dbman->create_table($table);
-            
+
             // Log per debug
             debugging('Created table local_coursemanager_sections', DEBUG_DEVELOPER);
         }

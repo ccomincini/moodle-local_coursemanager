@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<ruleset name="MoodlePlugin">
+    <description>Custom coding standard for Moodle plugins</description>
+    
+    <rule ref="PSR12">
+        <exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace"/>
+        <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps"/>
+        <exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps"/>
+    </rule>
+    
+    <!-- More permissive line length for external API definitions -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="200"/>
+            <property name="absoluteLineLimit" value="250"/>
+        </properties>
+    </rule>
+    
+    <rule ref="PSR1.Files.SideEffects">
+        <exclude-pattern>*/db/install.php</exclude-pattern>
+        <exclude-pattern>*/db/upgrade.php</exclude-pattern>
+        <exclude-pattern>*/version.php</exclude-pattern>
+        <exclude-pattern>*/externallib.php</exclude-pattern>
+    </rule>
+    
+    <file>.</file>
+    <arg name="extensions" value="php"/>
+</ruleset>
