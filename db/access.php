@@ -34,7 +34,7 @@ $capabilities = [
         ],
     ],
     'local/coursemanager:view' => [
-        'captype' => 'read', 
+        'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
             'student' => CAP_ALLOW,
