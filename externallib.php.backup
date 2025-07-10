@@ -29,19 +29,12 @@ require_once($CFG->dirroot . "/course/lib.php");
 require_once($CFG->dirroot . "/course/modlib.php");
 require_once($CFG->dirroot . "/mod/url/lib.php");
 
-/**
- * Course manager external API class
- *
- * @package    local_coursemanager
- * @copyright  2024 Your Name
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class local_coursemanager_external extends external_api {
-
     /**
      * Parametri per create_section
      */
-    public static function create_section_parameters() {
+    public static function create_section_parameters()
+    {
         return new external_function_parameters(
             [
                 'courseidnumber' => new external_value(PARAM_TEXT, 'ID number del corso'),
@@ -60,7 +53,8 @@ class local_coursemanager_external extends external_api {
      * @return array Result of section creation
      * @since Moodle 4.5
      */
-    public static function create_section($courseidnumber, $sectiontitle, $externalid) {
+    public static function create_section($courseidnumber, $sectiontitle, $externalid)
+    {
         global $DB, $CFG;
 
         // Validazione parametri.
@@ -145,7 +139,8 @@ class local_coursemanager_external extends external_api {
     /**
      * Valore di ritorno per create_section
      */
-    public static function create_section_returns() {
+    public static function create_section_returns()
+    {
         return new external_single_structure(
             [
                 'success' => new external_value(PARAM_BOOL, 'Successo operazione'),
@@ -161,7 +156,8 @@ class local_coursemanager_external extends external_api {
     /**
      * Parametri per update_section
      */
-    public static function update_section_parameters() {
+    public static function update_section_parameters()
+    {
         return new external_function_parameters(
             [
                 'courseidnumber' => new external_value(PARAM_TEXT, 'ID number del corso'),
@@ -172,15 +168,16 @@ class local_coursemanager_external extends external_api {
     }
 
      /**
-      * Updates a section in a course.
-      *
-      * @param string $courseidnumber Course ID number
-      * @param string $externalid External ID of the section
-      * @param string|null $sectiontitle New section title (optional)
-      * @return array Result of section update
-      * @since Moodle 4.5
-      */
-    public static function update_section($courseidnumber, $externalid, $sectiontitle = null) {
+     * Updates a section in a course.
+     *
+     * @param string $courseidnumber Course ID number
+     * @param string $externalid External ID of the section
+     * @param string|null $sectiontitle New section title (optional)
+     * @return array Result of section update
+     * @since Moodle 4.5
+     */
+    public static function update_section($courseidnumber, $externalid, $sectiontitle = null)
+    {
         global $DB;
 
         $params = self::validate_parameters(self::update_section_parameters(), [
@@ -242,7 +239,8 @@ class local_coursemanager_external extends external_api {
     /**
      * Valore di ritorno per update_section
      */
-    public static function update_section_returns() {
+    public static function update_section_returns()
+    {
         return new external_single_structure(
             [
                 'success' => new external_value(PARAM_BOOL, 'Successo operazione'),
@@ -255,7 +253,8 @@ class local_coursemanager_external extends external_api {
     /**
      * Parametri per get_section_info
      */
-    public static function get_section_info_parameters() {
+    public static function get_section_info_parameters()
+    {
         return new external_function_parameters(
             [
                 'courseidnumber' => new external_value(PARAM_TEXT, 'ID number del corso'),
@@ -272,7 +271,8 @@ class local_coursemanager_external extends external_api {
      * @return array Section information
      * @since Moodle 4.5
      */
-    public static function get_section_info($courseidnumber, $externalid) {
+    public static function get_section_info($courseidnumber, $externalid)
+    {
         global $DB;
 
         $params = self::validate_parameters(self::get_section_info_parameters(), [
@@ -321,7 +321,8 @@ class local_coursemanager_external extends external_api {
     /**
      * Valore di ritorno per get_section_info
      */
-    public static function get_section_info_returns() {
+    public static function get_section_info_returns()
+    {
         return new external_single_structure(
             [
                 'sectionid' => new external_value(PARAM_INT, 'ID della sezione'),
@@ -338,7 +339,8 @@ class local_coursemanager_external extends external_api {
     /**
      * Parametri per add_url_resource
      */
-    public static function add_url_resource_parameters() {
+    public static function add_url_resource_parameters()
+    {
         return new external_function_parameters(
             [
                 'courseidnumber' => new external_value(PARAM_TEXT, 'ID number del corso'),
@@ -582,7 +584,8 @@ class local_coursemanager_external extends external_api {
     /**
      * Valore di ritorno per add_url_resource
      */
-    public static function add_url_resource_returns() {
+    public static function add_url_resource_returns()
+    {
         return new external_single_structure(
             [
                 'success' => new external_value(PARAM_BOOL, 'Successo operazione'),
