@@ -5,13 +5,13 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Gestione Corsi';
 $string['privacy:metadata'] = 'Il plugin Gestione Corsi non memorizza dati personali.';
 
-// Messaggi di successo
+// Messaggi di successo.
 $string['section_created_success'] = 'Sezione creata con successo';
 $string['section_updated_success'] = 'Sezione aggiornata con successo';
 $string['resource_created_success'] = 'Risorsa URL creata con successo';
 $string['no_changes_requested'] = 'Nessuna modifica richiesta';
 
-// Messaggi di errore
+// Messaggi di errore.
 $string['course_not_found'] = 'Corso non trovato con idnumber: {$a}';
 $string['external_id_exists'] = 'External ID già esistente per questo corso: {$a}';
 $string['external_id_resource_exists'] = 'External ID per risorsa già esistente in questo corso: {$a}';
@@ -23,7 +23,7 @@ $string['section_not_found_external'] = 'Sezione non trovata con external_id: {$
 $string['section_not_found'] = 'Sezione non trovata';
 $string['course_not_found_simple'] = 'Corso non trovato';
 
-// Errori generici per eccezioni
+// Errori generici per eccezioni.
 $string['errorcreatesection'] = 'Errore nella creazione della sezione: {$a}';
 $string['errorupdatesection'] = 'Errore nell\'aggiornamento della sezione: {$a}';
 $string['errorcreateurlresource'] = 'Errore nella creazione della risorsa URL: {$a}';

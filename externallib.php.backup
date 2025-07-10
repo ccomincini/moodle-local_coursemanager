@@ -25,13 +25,7 @@ class local_coursemanager_external extends external_api
     }
 
     /**
-     * Creates a section in a course.
-     *
-     * @param int $courseid Course ID
-     * @param string $name Section name
-     * @param int $external_id External ID for the section
-     * @return array Result of section creation
-     * @since Moodle 4.5
+     * Crea una sezione nel corso
      */
     public static function create_section($courseidnumber, $sectiontitle, $external_id)
     {
@@ -148,13 +142,7 @@ class local_coursemanager_external extends external_api
     }
 
     /**
-     * Updates a section in a course.
-     *
-     * @param int $courseid Course ID
-     * @param string $name New section name
-     * @param int $external_id External ID of the section
-     * @return array Result of section update
-     * @since Moodle 4.5
+     * Aggiorna una sezione usando external_id
      */
     public static function update_section($courseidnumber, $external_id, $sectiontitle = null)
     {
@@ -244,12 +232,7 @@ class local_coursemanager_external extends external_api
     }
 
     /**
-     * Gets section information.
-     *
-     * @param int $courseid Course ID
-     * @param int $external_id External ID of the section
-     * @return array Section information
-     * @since Moodle 4.5
+     * Ottiene informazioni su una sezione
      */
     public static function get_section_info($courseidnumber, $external_id)
     {
@@ -339,15 +322,7 @@ class local_coursemanager_external extends external_api
     }
 
     /**
-     * Adds a URL resource to a section.
-     *
-     * @param int $section_external_id External ID of the section
-     * @param string $title Resource title
-     * @param string $description Resource description
-     * @param string $url Resource URL
-     * @param string $external_id External ID for the resource
-     * @return array Result of resource creation
-     * @since Moodle 4.5
+     * Aggiunge una risorsa URL alla sezione - VERSIONE 1.0.9 MANUALE
      */
     public static function add_url_resource(
         $courseidnumber,
