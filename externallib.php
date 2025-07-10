@@ -143,7 +143,7 @@ class local_coursemanager_external extends external_api {
     }
 
     /**
-     * Valore di ritorno per create_section
+     * Valore di ritorno per create_section.
      */
     public static function create_section_returns() {
         return new external_single_structure(
@@ -159,7 +159,7 @@ class local_coursemanager_external extends external_api {
     }
 
     /**
-     * Parametri per update_section
+     * Parametri per update_section.
      */
     public static function update_section_parameters() {
         return new external_function_parameters(
@@ -240,7 +240,7 @@ class local_coursemanager_external extends external_api {
     }
 
     /**
-     * Valore di ritorno per update_section
+     * Valore di ritorno per update_section.
      */
     public static function update_section_returns() {
         return new external_single_structure(
@@ -253,7 +253,7 @@ class local_coursemanager_external extends external_api {
     }
 
     /**
-     * Parametri per get_section_info
+     * Parametri per get_section_info.
      */
     public static function get_section_info_parameters() {
         return new external_function_parameters(
@@ -451,9 +451,9 @@ class local_coursemanager_external extends external_api {
                 }
             }
 
-            // APPROCCIO SICURO v1.0.9 - Creazione step by step con validazione
+            // APPROCCIO SICURO v1.0.9 - Creazione step by step con validazione.
 
-            // 1. Valida e pulisci i parametri PRIMA di inserire
+            // 1. Valida e pulisci i parametri PRIMA di inserire.
             $cleantitle = clean_param($params['resourcetitle'] . ' - LINK DA MODIFICARE!!!', PARAM_TEXT);
             $cleandescription = clean_param($params['description'], PARAM_RAW);
             $cleanurl = clean_param($params['resourceurl'], PARAM_URL);
@@ -472,7 +472,7 @@ class local_coursemanager_external extends external_api {
                 'external_id' => isset($cleanexternalid) ? $cleanexternalid : 'NOT_SET',
             ]), DEBUG_DEVELOPER);
 
-            // 2. Crea l'istanza URL nella tabella mod_url
+            // 2. Crea l'istanza URL nella tabella mod_url.
             $url = new stdClass();
             $url->course = $course->id;
             $url->name = $cleantitle;
@@ -496,10 +496,10 @@ class local_coursemanager_external extends external_api {
                 );
             }
 
-            // 3. Ottieni info sul modulo URL
+            // 3. Ottieni info sul modulo URL.
             $module = $DB->get_record('modules', ['name' => 'url'], '*', MUST_EXIST);
 
-            // 4. Crea il course module
+            // 4. Crea il course module.
             $cm = new stdClass();
             $cm->course = $course->id;
             $cm->module = $module->id;
@@ -535,7 +535,7 @@ class local_coursemanager_external extends external_api {
                 );
             }
 
-            // 5. Aggiorna la sequenza della sezione
+            // 5. Aggiorna la sequenza della sezione.
             $currentsequence = $section->sequence;
             $newsequence = $currentsequence ? $currentsequence . ',' . $cmid : $cmid;
 
@@ -554,7 +554,7 @@ class local_coursemanager_external extends external_api {
                 );
             }
 
-            // 6. Pulisci cache
+            // 6. Pulisci cache.
             rebuild_course_cache($course->id);
 
             return [
@@ -580,7 +580,7 @@ class local_coursemanager_external extends external_api {
     }
 
     /**
-     * Valore di ritorno per add_url_resource
+     * Valore di ritorno per add_url_resource.
      */
     public static function add_url_resource_returns() {
         return new external_single_structure(

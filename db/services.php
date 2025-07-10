@@ -32,7 +32,7 @@ $functions = [
         'description' => 'Crea una sezione in un corso identificato da idnumber',
         'type'        => 'write',
         'ajax'        => true,
-        'capabilities' => 'moodle/course:manageactivities,moodle/course:update'
+        'capabilities' => 'moodle/course:manageactivities,moodle/course:update',
     ],
     'update_section' => [
         'classname'   => 'local_coursemanager_external',
@@ -41,7 +41,7 @@ $functions = [
         'description' => 'Aggiorna una sezione usando external_id',
         'type'        => 'write',
         'ajax'        => true,
-        'capabilities' => 'moodle/course:update'
+        'capabilities' => 'moodle/course:update',
     ],
     'get_section_info' => [
         'classname'   => 'local_coursemanager_external',
@@ -50,7 +50,7 @@ $functions = [
         'description' => 'Ottiene informazioni su una sezione usando external_id',
         'type'        => 'read',
         'ajax'        => true,
-        'capabilities' => 'moodle/course:view'
+        'capabilities' => 'moodle/course:view',
     ],
     'add_url_resource' => [
         'classname'   => 'local_coursemanager_external',
@@ -59,7 +59,7 @@ $functions = [
         'description' => 'Aggiunge una risorsa URL a una sezione specifica',
         'type'        => 'write',
         'ajax'        => true,
-        'capabilities' => 'moodle/course:manageactivities'
+        'capabilities' => 'moodle/course:manageactivities',
     ],
 ];
 
@@ -69,10 +69,10 @@ $services = [
             'create_section',
             'update_section',
             'get_section_info',
-            'add_url_resource'
+            'add_url_resource',
         ],
         'restrictedusers' => 0,
         'enabled' => 1,
-        'shortname' => 'coursemanager'
-    ]
+        'shortname' => 'coursemanager',
+    ],
 ];
