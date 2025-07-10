@@ -27,5 +27,5 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component = 'local_coursemanager';
 $plugin->version = 2024011101; // Incrementa per forzare upgrade.
 $plugin->release = '1.1.1';
-$plugin->requires = 2023042400; // Moodle 4.2.  
+$plugin->requires = 2023042400; // Moodle 4.2.
 $plugin->maturity = MATURITY_STABLE;
