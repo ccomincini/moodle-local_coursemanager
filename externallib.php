@@ -28,11 +28,11 @@ class local_coursemanager_external extends external_api {
      *
      * @param string $courseidnumber Course ID number
      * @param string $sectiontitle Section title
-     * @param string $externalId External ID for the section
+     * @param string $externalid External ID for the section
      * @return array Result of section creation
      * @since Moodle 4.5
      */
-    public static function create_section($courseidnumber, $sectiontitle, $externalId)
+    public static function create_section($courseidnumber, $sectiontitle, $externalid)
     {
         global $DB, $CFG;
 
@@ -40,7 +40,7 @@ class local_coursemanager_external extends external_api {
         $params = self::validate_parameters(self::create_section_parameters(), [
             'courseidnumber' => $courseidnumber,
             'sectiontitle' => $sectiontitle,
-            'external_id' => $externalId,
+            'external_id' => $externalid,
         ]);
 
         // Trova il corso tramite idnumber.
@@ -150,18 +150,18 @@ class local_coursemanager_external extends external_api {
      * Updates a section in a course.
      *
      * @param string $courseidnumber Course ID number
-     * @param string $externalId External ID of the section
+     * @param string $externalid External ID of the section
      * @param string|null $sectiontitle New section title (optional)
      * @return array Result of section update
      * @since Moodle 4.5
      */
-    public static function update_section($courseidnumber, $externalId, $sectiontitle = null)
+    public static function update_section($courseidnumber, $externalid, $sectiontitle = null)
     {
         global $DB;
 
         $params = self::validate_parameters(self::update_section_parameters(), [
             'courseidnumber' => $courseidnumber,
-            'external_id' => $externalId,
+            'external_id' => $externalid,
             'sectiontitle' => $sectiontitle,
         ]);
 
@@ -246,17 +246,17 @@ class local_coursemanager_external extends external_api {
      * Gets section information.
      *
      * @param string $courseidnumber Course ID number
-     * @param string $externalId External ID of the section
+     * @param string $externalid External ID of the section
      * @return array Section information
      * @since Moodle 4.5
      */
-    public static function get_section_info($courseidnumber, $externalId)
+    public static function get_section_info($courseidnumber, $externalid)
     {
         global $DB;
 
         $params = self::validate_parameters(self::get_section_info_parameters(), [
             'courseidnumber' => $courseidnumber,
-            'external_id' => $externalId,
+            'external_id' => $externalid,
         ]);
 
         // Trova il corso.
@@ -341,32 +341,32 @@ class local_coursemanager_external extends external_api {
      * Adds a URL resource to a section.
      *
      * @param string $courseidnumber Course ID number
-     * @param string $sectionExternalId External ID of the section
+     * @param string $sectionexternalid External ID of the section
      * @param string $resourcetitle Resource title
      * @param string $resourceurl Resource URL
      * @param string $description Resource description
-     * @param string $externalId External ID for the resource
+     * @param string $externalid External ID for the resource
      * @return array Result of resource creation
      * @since Moodle 4.5
      */
     public static function add_url_resource(
         $courseidnumber,
-        $sectionExternalId,
+        $sectionexternalid,
         $resourcetitle,
         $resourceurl = 'https:// INSERISCI.QUI.IL/LINK_CORRETTO/AL_WEBINAR',
         $description = '',
-        $externalId = ''
+        $externalid = ''
     ) {
         global $DB, $CFG;
 
         // Validazione parametri.
         $params = self::validate_parameters(self::add_url_resource_parameters(), [
             'courseidnumber' => $courseidnumber,
-            'section_external_id' => $sectionExternalId,
+            'section_external_id' => $sectionexternalid,
             'resourcetitle' => $resourcetitle,
             'resourceurl' => $resourceurl,
             'description' => $description,
-            'external_id' => $externalId,
+            'external_id' => $externalid,
         ]);
 
         // Trova il corso tramite idnumber.
@@ -404,29 +404,29 @@ class local_coursemanager_external extends external_api {
         try {
             // Verifica se external_id è già utilizzato come cmidnumber - CONTROLLO MIGLIORATO.
             if (!empty($params['external_id']) && trim($params['external_id']) !== '') {
-                $cleanExternalId = clean_param(trim($params['external_id']), PARAM_TEXT);
+                $cleanexternalid = clean_param(trim($params['external_id']), PARAM_TEXT);
 
                 // Controllo duplicati più specifico.
-                $existingCm = $DB->get_record('course_modules', [
+                $existingcm = $DB->get_record('course_modules', [
                     'course' => $course->id,
-                    'idnumber' => $cleanExternalId,
+                    'idnumber' => $cleanexternalid,
                 ]);
 
-                if ($existingCm) {
+                if ($existingcm) {
                     // Errore chiaro e specifico per duplicati - USA STRINGA LOCALIZZATA.
                     throw new invalid_parameter_exception(
-                        get_string('external_id_resource_exists', 'local_coursemanager', $cleanExternalId)
+                        get_string('external_id_resource_exists', 'local_coursemanager', $cleanexternalid)
                     );
                 }
 
                 // Controllo duplicati globali (opzionale ma utile).
-                $existingGlobal = $DB->get_record('course_modules', ['idnumber' => $cleanExternalId]);
-                if ($existingGlobal) {
+                $existingglobal = $DB->get_record('course_modules', ['idnumber' => $cleanexternalid]);
+                if ($existingglobal) {
                     throw new invalid_parameter_exception(
                         get_string(
                             'external_id_resource_exists',
                             'local_coursemanager',
-                            $cleanExternalId . ' (in corso ID: ' . $existingGlobal->course . ')'
+                            $cleanexternalid . ' (in corso ID: ' . $existingglobal->course . ')'
                         )
                     );
                 }
@@ -435,12 +435,12 @@ class local_coursemanager_external extends external_api {
             // APPROCCIO SICURO v1.0.9 - Creazione step by step con validazione
 
             // 1. Valida e pulisci i parametri PRIMA di inserire
-            $cleanTitle = clean_param($params['resourcetitle'] . ' - LINK DA MODIFICARE!!!', PARAM_TEXT);
-            $cleanDescription = clean_param($params['description'], PARAM_RAW);
-            $cleanUrl = clean_param($params['resourceurl'], PARAM_URL);
+            $cleantitle = clean_param($params['resourcetitle'] . ' - LINK DA MODIFICARE!!!', PARAM_TEXT);
+            $cleandescription = clean_param($params['description'], PARAM_RAW);
+            $cleanurl = clean_param($params['resourceurl'], PARAM_URL);
 
             // Controllo URL valido.
-            if (empty($cleanUrl) || $cleanUrl !== $params['resourceurl']) {
+            if (empty($cleanurl) || $cleanurl !== $params['resourceurl']) {
                 throw new invalid_parameter_exception(
                     get_string('invalid_url', 'local_coursemanager', $params['resourceurl'])
                 );
@@ -448,18 +448,18 @@ class local_coursemanager_external extends external_api {
 
             // Debug: Log parametri validati.
             debugging('Parametri validati: ' . json_encode([
-                'title' => $cleanTitle,
-                'url' => $cleanUrl,
-                'external_id' => isset($cleanExternalId) ? $cleanExternalId : 'NOT_SET',
+                'title' => $cleantitle,
+                'url' => $cleanurl,
+                'external_id' => isset($cleanexternalid) ? $cleanexternalid : 'NOT_SET',
             ]), DEBUG_DEVELOPER);
 
             // 2. Crea l'istanza URL nella tabella mod_url
             $url = new stdClass();
             $url->course = $course->id;
-            $url->name = $cleanTitle;
-            $url->intro = $cleanDescription;
+            $url->name = $cleantitle;
+            $url->intro = $cleandescription;
             $url->introformat = FORMAT_HTML;
-            $url->externalurl = $cleanUrl;
+            $url->externalurl = $cleanurl;
             $url->display = 0;
             $url->displayoptions = '';
             $url->parameters = '';
@@ -499,7 +499,7 @@ class local_coursemanager_external extends external_api {
 
             // Aggiungi idnumber solo se fornito e validato.
             if (!empty($params['external_id']) && trim($params['external_id']) !== '') {
-                $cm->idnumber = $cleanExternalId;
+                $cm->idnumber = $cleanexternalid;
             }
 
             $cmid = $DB->insert_record('course_modules', $cm);
@@ -517,12 +517,12 @@ class local_coursemanager_external extends external_api {
             }
 
             // 5. Aggiorna la sequenza della sezione
-            $currentSequence = $section->sequence;
-            $newSequence = $currentSequence ? $currentSequence . ',' . $cmid : $cmid;
+            $currentsequence = $section->sequence;
+            $newsequence = $currentsequence ? $currentsequence . ',' . $cmid : $cmid;
 
-            $updateResult = $DB->set_field('course_sections', 'sequence', $newSequence, ['id' => $section->id]);
+            $updateresult = $DB->set_field('course_sections', 'sequence', $newsequence, ['id' => $section->id]);
 
-            if (!$updateResult) {
+            if (!$updateresult) {
                 // Rollback completo.
                 $DB->delete_records('course_modules', ['id' => $cmid]);
                 $DB->delete_records('url', ['id' => $urlid]);
@@ -543,7 +543,7 @@ class local_coursemanager_external extends external_api {
                 'cmid' => $cmid,
                 'instanceid' => $urlid,
                 'section_external_id' => $params['section_external_id'],
-                'resource_external_id' => isset($cleanExternalId) ? $cleanExternalId : '',
+                'resource_external_id' => isset($cleanexternalid) ? $cleanexternalid : '',
                 'message' => get_string('resource_created_success', 'local_coursemanager'),
             ];
         } catch (invalid_parameter_exception $e) {
@@ -551,12 +551,12 @@ class local_coursemanager_external extends external_api {
             throw $e;
         } catch (Exception $e) {
             // Debug dettagliato per errori imprevisti.
-            $errorDetails = "Errore imprevisto: " . $e->getMessage();
+            $errordetails = "Errore imprevisto: " . $e->getMessage();
             if (method_exists($e, 'getFile')) {
-                $errorDetails .= " in " . $e->getFile() . " line " . $e->getLine();
+                $errordetails .= " in " . $e->getFile() . " line " . $e->getLine();
             }
 
-            throw new moodle_exception('errorcreateurlresource', 'local_coursemanager', '', null, $errorDetails);
+            throw new moodle_exception('errorcreateurlresource', 'local_coursemanager', '', null, $errordetails);
         }
     }
 

@@ -24,25 +24,25 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// Plugin name.,
+// Plugin name.
 $string['pluginname'] = 'Course Manager';
 
-// General strings.,
+// General strings.
 $string['coursemanager'] = 'Course Manager';
 
-// Settings and configuration.,
+// Settings and configuration.
 $string['settings'] = 'Settings';
 
 $string['privacy:metadata'] = 'The Course Manager plugin does not store any personal data.';
 
 
-// Messaggi di successo.,
+// Messaggi di successo.
 $string['section_created_success'] = 'Section created successfully';
 $string['section_updated_success'] = 'Section updated successfully';
 $string['resource_created_success'] = 'URL resource created successfully';
 $string['no_changes_requested'] = 'No changes requested';
 
-// Messaggi di errore.,
+// Messaggi di errore.
 $string['course_not_found'] = 'Course not found with idnumber: {$a}';
 $string['external_id_exists'] = 'External ID already exists for this course: {$a}';
 $string['external_id_resource_exists'] = 'External ID for resource already exists in this course: {$a}';
@@ -54,7 +54,7 @@ $string['section_not_found_external'] = 'Section not found with external_id: {$a
 $string['section_not_found'] = 'Section not found';
 $string['course_not_found_simple'] = 'Course not found';
 
-// Errori generici per eccezioni.,
+// Errori generici per eccezioni.
 $string['errorcreatesection'] = 'Error creating section: {$a}';
 $string['errorupdatesection'] = 'Error updating section: {$a}';
 $string['errorcreateurlresource'] = 'Error creating URL resource: {$a}';
